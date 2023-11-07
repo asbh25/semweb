@@ -1,0 +1,12 @@
+PREFIX dbo: <http://dbpedia.org/ontology/>
+
+SELECT ?city ?cityName ?foundingDate
+WHERE {
+  ?city a dbo:City ;
+        dbo:country <http://dbpedia.org/resource/Ukraine> ;
+        dbo:foundingDate ?foundingDate ;
+        rdfs:label ?cityName .
+  FILTER (xsd:date(?foundingDate) && langMatches(lang(?cityName), 'uk'))
+}
+ORDER BY DESC(?foundingDate)
+LIMIT 1
